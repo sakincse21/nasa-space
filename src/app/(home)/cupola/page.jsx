@@ -15,7 +15,7 @@ export default async function CupolaPage() {
   const res = await fetch(
     "https://images-api.nasa.gov/search?q=cupola&media_type=image",
     {
-      cache: "force-cache"
+      cache: "default",
     }
   );
   const data = await res.json();
@@ -27,13 +27,16 @@ export default async function CupolaPage() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
-\      <h1
+      \{" "}
+      <h1
         className="text-center text-5xl overflow-hidden transition-all duration-500 w-full [filter:drop-shadow(0_0_23px_#ff3737)]"
         style={{
-          color: '#ff3737',
+          color: "#ff3737",
           WebkitTextStroke: `1px #ff3737`,
         }}
-      >Cupola Images</h1>
+      >
+        Cupola Images
+      </h1>
       {randomItem.length == 0 ? (
         <div className="w-full h-full flex justify-center items-center">
           No Images Found
@@ -46,11 +49,8 @@ export default async function CupolaPage() {
                 <DialogTrigger>
                   <TiltEffect>
                     <Card className="overflow-hidden pt-0 md:w-md">
-                      
                       <Image
                         src={item.links[0].href}
-                        // placeholder="blur"
-                        // blurDataURL="https://images-assets.nasa.gov/image/iss036e007470/iss036e007470~medium.jpg"
                         alt="cupola"
                         width={240}
                         height={240}
@@ -67,10 +67,12 @@ export default async function CupolaPage() {
                     </Card>
                   </TiltEffect>
                 </DialogTrigger>
-                <DialogContent >
-                  <DialogHeader >
-                    <div className="w-full p-5">
-                      <img
+                <DialogContent className={"w-[600px]"}>
+                  <DialogHeader>
+                    <div className="w-full p-4">
+                      <Image
+                        width={480}
+                        height={480}
                         src={item.links[0].href}
                         alt="cupola"
                         className="w-full h-[240px] object-cover drop-shadow-red-700 drop-shadow-xl"

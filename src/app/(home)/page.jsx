@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import astronaut from "@/assets/img/astro.png";
 import { Magnetic } from "@/components/ui/shadcn-io/magnetic";
-import { TextRevealButton } from "@/components/ui/shadcn-io/text-reveal-button"
+import { TextRevealButton } from "@/components/ui/shadcn-io/text-reveal-button";
 
 export default async function HomePage() {
   const res = await fetch(
     "https://images-api.nasa.gov/search?q=cupola&media_type=image",
     {
-      cache: "force-cache"
+      cache: "default"
     }
   );
   const data = await res.json();
@@ -33,8 +33,7 @@ export default async function HomePage() {
         </Link>
       </div>
       {/* game redirect link */}
-      <div className="w-full flex justify-center items-center">
-      </div>
+      <div className="w-full flex justify-center items-center"></div>
     </div>
   );
 }
