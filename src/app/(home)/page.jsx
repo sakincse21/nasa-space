@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import astronaut from "@/assets/img/astro.png";
@@ -15,28 +14,19 @@ export default function HomePage() {
         </Magnetic>
       </div>
       {/* cupola images and co ord btns */}
-      <div className="w-full flex gap-5 justify-center items-center">
+      <div className="w-full flex flex-col md:flex-row gap-6 justify-center items-center">
         <Link href={"/cupola"}>
-          {/* <Button variant={"destructive"} className={"text-4xl p-8"}>
-            Cupola Image
-            </Button> */}
           <TextRevealButton text="Cupola Images" />
         </Link>
-        <Link href={"/quiz"}>
+        {/* <Link href={"/quiz"}>
             <TextRevealButton text="Solve Quizs" />
-          {/* <Button variant={"destructive"} className={"text-4xl p-8"}>
-            Quiz
-          </Button> */}
+        </Link> */}
+        <Link href={"/game"}>
+          <TextRevealButton text="Play Game" />
         </Link>
       </div>
       {/* game redirect link */}
       <div className="w-full flex justify-center items-center">
-        <Link href={"/game"}>
-          {/* <Button variant={"destructive"} className={"text-4xl p-8"}>
-            Play Game
-          </Button> */}
-          <TextRevealButton text="Play Game" />
-        </Link>
       </div>
     </div>
   );

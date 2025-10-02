@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { TiltEffect } from "@/components/ui/tilt-effect";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,37 +9,42 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
 
-export default function CupolaPage() {
-  const [items, setItems] = useState([]);
+export default async function CupolaPage() {
+  const res = await fetch(
+    "https://images-api.nasa.gov/search?q=cupola&media_type=image",
+    {
+      cache: "no-store",
+    }
+  );
+  const data = await res.json();
 
-  useEffect(async () => {
-    const res = await fetch(
-      "https://images-api.nasa.gov/search?q=cupola&media_type=image"
-    );
-    const data = await res.json();
+  const items2 = data.collection.items;
 
-    const items = data.collection.items;
+  const randomIndex = Math.floor(Math.random() * items2.length);
+  const randomItem = items2.slice(randomIndex, randomIndex + 12);
 
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const randomItem = items.slice(randomIndex, randomIndex + 12);
-
-    setItems(randomItem);
-  }, []);
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-2xl text-cyan-300">Cupola Image</h1>
-      {items.length == 0 ? (
-        <p className="text-4xl">Loading...</p>
+    <div className="flex flex-col justify-center items-center w-full h-full">
+\      <h1
+        className="text-center text-5xl overflow-hidden transition-all duration-500 w-full [filter:drop-shadow(0_0_23px_#ff3737)]"
+        style={{
+          color: '#ff3737',
+          WebkitTextStroke: `1px #ff3737`,
+        }}
+      >Cupola Images</h1>
+      {randomItem.length == 0 ? (
+        <div className="w-full h-full flex justify-center items-center">
+          No Images Found
+        </div>
       ) : (
-        <div className="w-full p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {items?.map((item) => (
+        <div className="w-full h-full p-8 flex flex-col sm:flex-row flex-wrap justify-center items-center gap-5">
+          {randomItem?.map((item) => (
             <div key={item.links[0].href}>
               <Dialog>
                 <DialogTrigger>
                   <TiltEffect>
-                    <Card className="overflow-hidden pt-0 md:w-[280px]">
+                    <Card className="overflow-hidden pt-0 md:w-md">
                       <img
                         src={item.links[0].href}
                         alt="cupola"
@@ -57,20 +61,20 @@ export default function CupolaPage() {
                     </Card>
                   </TiltEffect>
                 </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
+                <DialogContent >
+                  <DialogHeader >
                     <div className="w-full p-5">
                       <img
                         src={item.links[0].href}
                         alt="cupola"
-                        className="w-full h-[240px] object-cover"
+                        className="w-full h-[240px] object-cover drop-shadow-red-700 drop-shadow-xl"
                       />
                     </div>
                     <DialogTitle>
-                      <span className="text-xl">{item?.data[0]?.title}</span>
+                      <span className="text-2xl">{item?.data[0]?.title}</span>
                     </DialogTitle>
                     <DialogDescription>
-                      <span className="text-muted-foreground text-sm">
+                      <span className="text-muted-foreground text-lg">
                         {item?.data[0]?.description}
                       </span>
                     </DialogDescription>
@@ -81,7 +85,6 @@ export default function CupolaPage() {
           ))}
         </div>
       )}
-      <Button variant={"destructive"}>See Another</Button>
     </div>
   );
 }

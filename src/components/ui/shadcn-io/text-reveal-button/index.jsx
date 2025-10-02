@@ -18,7 +18,7 @@ export const TextRevealButton = React.forwardRef(({
         className
       )}
       style={{
-        fontSize: '2em',
+        fontSize: '3em',
         letterSpacing: '3px',
         color: 'transparent',
         WebkitTextStroke: `1px ${strokeColor}`,
