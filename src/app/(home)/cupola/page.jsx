@@ -9,12 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Image from "next/image";
 
 export default async function CupolaPage() {
   const res = await fetch(
     "https://images-api.nasa.gov/search?q=cupola&media_type=image",
     {
-      cache: "no-store",
+      cache: "force-cache"
     }
   );
   const data = await res.json();
@@ -45,9 +46,14 @@ export default async function CupolaPage() {
                 <DialogTrigger>
                   <TiltEffect>
                     <Card className="overflow-hidden pt-0 md:w-md">
-                      <img
+                      
+                      <Image
                         src={item.links[0].href}
+                        // placeholder="blur"
+                        // blurDataURL="https://images-assets.nasa.gov/image/iss036e007470/iss036e007470~medium.jpg"
                         alt="cupola"
+                        width={240}
+                        height={240}
                         className="w-full h-[240px] object-cover"
                       />
                       <CardContent className="mt-2">

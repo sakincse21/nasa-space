@@ -12,7 +12,7 @@ export default function GamePage() {
       <iframe
         src="/gd2/NSAC-25.html"
         width="960"
-        height="600"
+        height="580"
         style={{ border: "none" }}
         title="Gravity 0.0"
       />

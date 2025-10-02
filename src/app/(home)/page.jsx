@@ -4,7 +4,14 @@ import astronaut from "@/assets/img/astro.png";
 import { Magnetic } from "@/components/ui/shadcn-io/magnetic";
 import { TextRevealButton } from "@/components/ui/shadcn-io/text-reveal-button"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const res = await fetch(
+    "https://images-api.nasa.gov/search?q=cupola&media_type=image",
+    {
+      cache: "force-cache"
+    }
+  );
+  const data = await res.json();
   return (
     <div className="w-full h-full grow-1 flex flex-col justify-center items-center gap-5">
       {/* gif of astranaut roaming */}
